@@ -41,7 +41,7 @@ Clone the repository, and the resulting directory will be referred to as `${Univ
 
 ```bash
 # Get the UniverseGenerator source code
-git clone https://github.com/AJluttens/UniverseGenerator/UniverseGenerator.git
+git clone https://github.com/carlssonlab/UniverseGenerator/UniverseGenerator.git
 
 # Define its location
 export UniverseGenerator=$PWD/UniverseGenerator
