@@ -248,7 +248,7 @@ ${UniverseGenerator}/bin/activate-substituents -i ${demo}/6.substituents/input.s
 To prepare a [fragment scaffold](demo/7.scaffold/scaffold.smi) for superstructure generation, run the following command:
 ```bash
 # Activate a scaffold for coupling with substituent libraries
-${UniverseGenerator}/bin/activate-scaffold -i ${demo}/7.scaffold/input.scaffold.smi -o ${demo}/7.scaffold/output.scaffold.smi
+${UniverseGenerator}/bin/activate-scaffold -i ${demo}/7.scaffold/input.scaffold.smi -o ${demo}/7.scaffold/output.scaffolds.smi
 ```
 
 ## 8. Coupling Substituents to a Scaffold
@@ -258,10 +258,10 @@ The first step is to link the [activated substituent libraries](demo/6.substitue
 bash ${UniverseGenerator}/scripts/fetch_substituents.sh
 ```
 
-The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/reference.output.scaffold.smi) and [activated substituent libraries](demo/6.substituents/reference.output.substituents.smi). To add **5** heavy atoms to your scaffold, run the following command: 
+The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/reference.output.scaffolds.smi) and [activated substituent libraries](demo/6.substituents/reference.output.substituents.smi). To add **5** heavy atoms to your scaffold, run the following command: 
 ```bash
 # Generate instructions for coupling substituents onto activated scaffolds, where the target products are composed of 15 heavy atoms
-${UniverseGenerator}/bin/build-instructions -i ${demo}/8.superstructure/input.coupling.smi -o ${demo}/8.superstructure/superstructure-instructions.csv -n 15
+${UniverseGenerator}/bin/build-instructions -i ${demo}/8.superstructure/input.scaffolds.smi -o ${demo}/8.superstructure/superstructure-instructions.csv -n 15
 ```
 In the third step (which can be effectively parallelized on a HPC) the [instructions](demo/8.superstructure/safe.superstructure-instructions.csv) derived in the second step are carried out and [valid superstructures](demo/8.superstructure/safe.output.superstructure.smi) are generated. This is achieved through the following command:
 
