@@ -12,6 +12,6 @@ cd nauty2_8_8
 make
 
 # Put key executables in UniverseGenerator's bin folder
-cp geng ${UniverseGenerator}/bin
-cp planarg ${UniverseGenerator}/bin
-cp showg ${UniverseGenerator}/bin
+cp ${UniverseGenerator}/nauty2_8_8/geng ${UniverseGenerator}/bin/geng
+cp ${UniverseGenerator}/nauty2_8_8/planarg ${UniverseGenerator}/bin/planarg
+cp ${UniverseGenerator}/nauty2_8_8/showg ${UniverseGenerator}/bin/showg
