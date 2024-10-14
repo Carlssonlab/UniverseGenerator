@@ -212,13 +212,13 @@ ln -s ${demo}/3.unsaturate/output.unsaturate.smi ${demo}/4.functionalize/input.f
 ```
 
 ## 4. Introducing Heteroatoms
-To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/reference.output.unsaturate.smi) and remove patterns found in the [functionality_file](auxiliaries/functionality_file.tsv), run the following command:
+To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/reference.output.unsaturate.smi) and remove patterns found in the [functionality_filter](auxiliaries/functionality_filter.tsv), run the following command:
 
 ```bash
 # Introduce heteroatoms in hydrocarbons and filter out patterns from filter_file.tsv
 ${UniverseGenerator}/bin/functionalize -i ${demo}/4.functionalize/input.functionalize.smi \
                                        -o ${demo}/4.functionalize/output.functionalize.smi \
-                                       -f ${UniverseGenerator}/auxiliaries/functionality_file.tsv
+                                       -f ${UniverseGenerator}/auxiliaries/functionality_filter.tsv
 
 # Symbolic link for next step
 ln -s ${demo}/4.functionalize/output.functionalize.smi ${demo}/5.decorate/input.decorate.smi
