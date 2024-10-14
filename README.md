@@ -82,6 +82,8 @@ make
 make -j4 install
 ```
 
+If you have issues installing RDKit from source, [this blogpost](https://greglandrum.github.io/rdkit-blog/posts/2023-03-17-setting-up-a-cxx-dev-env2.html) might be useful. Alternatively RDKit can be installed via conda (Python3.10).
+
 Install the dreadnaut through running the following command:
 ```bash
 bash ${UniverseGenerator}/scripts/install_nauty.sh
