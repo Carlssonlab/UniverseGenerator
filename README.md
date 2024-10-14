@@ -212,7 +212,7 @@ ln -s ${demo}/3.unsaturate/output.unsaturate.smi ${demo}/4.functionalize/input.f
 ```
 
 ## 4. Introducing Heteroatoms
-To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/reference.output.unsaturate.smi) and remove patterns found in the [filter_file](auxiliaries/functionality_file.tsv), run the following command:
+To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/reference.output.unsaturate.smi) and remove patterns found in the [functionality_file](auxiliaries/functionality_file.tsv), run the following command:
 
 ```bash
 # Introduce heteroatoms in hydrocarbons and filter out patterns from filter_file.tsv
