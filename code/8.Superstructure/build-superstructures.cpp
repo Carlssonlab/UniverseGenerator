@@ -17,8 +17,6 @@
 #include <iterator>
 #include <filesystem>
 #include <functional> 
-//#include <thread>
-//#include <chrono>
 
 // RDKit functions
 #include <GraphMol/GraphMol.h>

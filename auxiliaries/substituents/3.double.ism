@@ -1,0 +1,17 @@
+COC=[Hf]
+CC(O)=[Hf]
+OCC=[Hf]
+CC(N)=[Hf]
+CCN=[Hf]
+NCC=[Hf]
+CC(C)=[Hf]
+CCC=[Hf]
+CNC=[Hf]
+C#CC=[Hf]
+C=CC=[Hf]
+O=CC=[Hf]
+O=CN=[Hf]
+N=CN=[Hf]
+[Hf]=C1CO1
+[Hf]=C1CC1
+[Hf]=C1CN1
