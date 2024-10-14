@@ -151,13 +151,13 @@ The first step is to generate (planar) graphs using [*Nauty*](https://pallini.di
 # Create planar g6 graphs
 ${UniverseGenerator}/bin/geng -cd1D4 5 | ${UniverseGenerator}/bin/planarg > ${demo}/1.generate/input.convert.g6
 ```
-The resulting [graphs](demo/1.generate/safe.input.convert.g6) are stored in the [**g6**](https://reference.wolfram.com/language/ref/format/Graph6.html) format. The adjacency matrices corresponding to these graphs can be visualized by:
+The resulting [graphs](demo/1.generate/reference.input.convert.g6) are stored in the [**g6**](https://reference.wolfram.com/language/ref/format/Graph6.html) format. The adjacency matrices corresponding to these graphs can be visualized by:
 
 ```bash
 # Show adjacency matrix
 ${UniverseGenerator}/bin/showg -a ${demo}/1.generate/input.convert.g6
 ```
-The g6 graphs can be transformed into (hydrocarbon) [SMILES](demo/1.generate/safe.output.convert.smi) with the following command:
+The g6 graphs can be transformed into (hydrocarbon) [SMILES](demo/1.generate/reference.output.convert.smi) with the following command:
 
 ```bash
 # Convert g6 graph to SMILES
@@ -201,7 +201,7 @@ ${UniverseGenerator}/bin/eliminate-strained -i ${demo}/2.strain/input.eliminate.
 ```
 
 ## 3. Introducing Unsaturations
-To generate all unsaturated analogs of [hydrocarbons](demo/2.strain/safe.output.eliminate.smi), run the following command:
+To generate all unsaturated analogs of [hydrocarbons](demo/2.strain/reference.output.eliminate.smi), run the following command:
 
 ```bash
 # Introduce unsaturations in saturated hydrocarbons
@@ -212,33 +212,33 @@ ln -s ${demo}/3.unsaturate/output.unsaturate.smi ${demo}/4.functionalize/input.f
 ```
 
 ## 4. Introducing Heteroatoms
-To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/safe.output.unsaturate.smi) and remove patterns found in the [filter_file](demo/4.functionalize/filter_file.tsv), run the following command:
+To insert heteroatoms (N & O) in [(unsaturated) hydrocarbons](demo/3.unsaturate/reference.output.unsaturate.smi) and remove patterns found in the [filter_file](auxiliaries/functionality_file.tsv), run the following command:
 
 ```bash
 # Introduce heteroatoms in hydrocarbons and filter out patterns from filter_file.tsv
 ${UniverseGenerator}/bin/functionalize -i ${demo}/4.functionalize/input.functionalize.smi \
                                        -o ${demo}/4.functionalize/output.functionalize.smi \
-                                       -f ${UniverseGenerator}/auxiliaries/filter_file.tsv
+                                       -f ${UniverseGenerator}/auxiliaries/functionality_file.tsv
 
 # Symbolic link for next step
 ln -s ${demo}/4.functionalize/output.functionalize.smi ${demo}/5.decorate/input.decorate.smi
 ```
 
 ## 5. Introducing Decorations
-To further decorate functionalized molecules based on the reaction patterns found in [smirks_library](demo/5.decorate/smirks_library.tsv) and a total of `N = [1,2,3,...]` heavy atoms, run the following command:
+To further decorate functionalized molecules based on the reaction patterns found in [reaction_library](auxiliaries/reaction_library.tsv) and a total of `N = [1,2,3,...]` heavy atoms, run the following command:
 
 ```bash
 # Introduce decorations in molecules (with 5 heavy atoms) based on reaction patterns in smirks_library.tsv
-${UniverseGenerator}/bin/decorate -i ${demo}/5.decorate/input.decorate.smi -o ${demo}/5.decorate/output.decorate.smi -r ${UniverseGenerator}/auxiliaries/smirks_library.tsv -n 5
+${UniverseGenerator}/bin/decorate -i ${demo}/5.decorate/input.decorate.smi -o ${demo}/5.decorate/output.decorate.smi -r ${UniverseGenerator}/auxiliaries/reaction_library.tsv -n 5
 
 # Symbolic link for next step
 ln -s ${demo}/5.decorate/output.decorate.smi ${demo}/6.activate/input.substituents.smi
 ```
 
-If you want to introduce other functional groups, you can modify the [file](demo/5.decorate/smirks_library.tsv) containing the chemical transformations and add new [SMIRKS](https://www.daylight.com/dayhtml/doc/theory/theory.smirks.html) patterns. 
+If you want to introduce other functional groups, you can modify the [file](auxiliaries/reaction_library.tsv) containing the chemical transformations and add new [SMIRKS](https://www.daylight.com/dayhtml/doc/theory/theory.smirks.html) patterns. 
 
 ## 6. Activating Substituents
-To activate [substituents](demo/6.substituents/input.substituents.smi) in a library for coupling to a scaffold, run the following command:
+To activate [substituents](demo/6.substituents/reference.input.substituents.smi) in a library for coupling to a scaffold, run the following command:
 ```bash
 # Activate substituents for coupling onto a scaffold
 ${UniverseGenerator}/bin/activate-substituents -i ${demo}/6.substituents/input.substituents.smi -o ${demo}/6.substituents/output.substituents.smi
@@ -252,13 +252,13 @@ ${UniverseGenerator}/bin/activate-scaffold -i ${demo}/7.scaffold/input.scaffold.
 ```
 
 ## 8. Coupling Substituents to a Scaffold
-The first step is to link the [activated substituent libraries](demo/6.substituents/safe.output.substituents.smi).
+The first step is to link the [activated substituent libraries](demo/6.substituents/reference.output.substituents.smi).
 ```bash
 # Get the substituent libraries
 bash ${UniverseGenerator}/scripts/fetch_substituents.sh
 ```
 
-The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/safe.output.scaffold.smi) and [activated substituent libraries](demo/6.substituents/safe.output.substituents.smi). To add **5** heavy atoms to your scaffold, run the following command: 
+The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/reference.output.scaffold.smi) and [activated substituent libraries](demo/6.substituents/reference.output.substituents.smi). To add **5** heavy atoms to your scaffold, run the following command: 
 ```bash
 # Generate instructions for coupling substituents onto activated scaffolds, where the target products are composed of 15 heavy atoms
 ${UniverseGenerator}/bin/build-instructions -i ${demo}/8.superstructure/input.coupling.smi -o ${demo}/8.superstructure/superstructure-instructions.csv -n 15
