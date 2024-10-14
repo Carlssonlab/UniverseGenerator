@@ -1,0 +1,42 @@
+// Standardize the given fingerprint based on atom symmetries and symmetry classes
+std::string standardize_fingerprint(std::vector<std::tuple<unsigned int,unsigned int, unsigned int>>& fingerprint,\
+                                    std::unordered_map<unsigned int,unsigned int>& atom_symmetries,\
+                                    std::unordered_map<unsigned int,std::vector<unsigned int>>& symmetry_classes)
+{
+    // This is the output string
+    std::string standardize_fingerprint;
+
+    // Vector corresponding to standardized fingerprint after sort
+    std::vector<std::tuple<int,int,int>> standardized_vector = {};
+
+    // Iterate over all activation tuples
+    for (const auto& information_tuple : fingerprint) 
+    {     
+        // Check if there is an atom with equivalent symmetry
+        std::vector<unsigned int> eval_set = symmetry_classes[atom_symmetries[std::get<0>(information_tuple)]];
+
+        // Get the minimal element
+        int min_elem = *(--eval_set.rend());
+
+        //
+        standardized_vector.emplace_back(std::make_tuple(min_elem, std::get<1>(information_tuple), std::get<2>(information_tuple)));
+    }
+
+    // Sort the standardized fingerprint
+    std::sort(standardized_vector.begin(), standardized_vector.end()); //, stepwise_sorter);
+
+    // Format the fingerprint string
+    for (const auto& information_tuple : standardized_vector)
+    {
+        //
+        std::string token = std::to_string(std::get<0>(information_tuple)) + "@" + \
+                            std::to_string(std::get<1>(information_tuple)) + "#" + \
+                            std::to_string(std::get<2>(information_tuple)) + "-";
+        standardize_fingerprint.append(token);
+    }
+
+    // Remove the last junction character
+    standardize_fingerprint.erase(standardize_fingerprint.size() - 1);
+
+    return standardize_fingerprint;
+}

@@ -1,0 +1,17 @@
+hetero	[N]!@-[#7,#8]
+ketone	[#6][#6](=[O])[#6]
+aldehyde	[#6][#6H1](=[O])
+acetal	[#8]-!@[CX4]-[#8]
+acetalchain	[O]-[CX4]-[O]-[CX4]-[O]
+carbonic/amic_acid	[#8,#7]-[C](=[O])[OH]
+betacarboxylic_acid	[#6](=[O])-[#6]-[C](=[O])[OH]
+acyclic_carbonate	[#8]-@[#6](=[#8])-@[#8]
+enol	[C]=[C]-[#8]
+enamine	[C]=[C]-[#7]
+anhydride	[#6](=[#8])-[#8]-[#6](=[#8])
+iminelike	[N,O]-[C]=[N]-[C]=[N,O]
+imine	[$([CX3]([#6])[#6]),$([CX3H][#6]),$([CH2])]=[$([NH1]),$([N][#6])]
+(hemi)aminal	[#7]-[CX4]-[#7,#8]
+gemdiol	[OH]-[CX4]-[OH]
+ethylol/amine	[C]#[C]-[N,O]
+primary_amine+ketone_aldehyde	[#7H2].[#6][C;!$(C-O);!$(C-N)](=[O])

@@ -1,0 +1,38 @@
+// Check what type of activation tag is bound to parsed atom
+std::vector<std::pair<unsigned int, unsigned int>> determine_atom_activation(const RDKit::ROMol &mol, const RDKit::Atom &atom,\
+                                                                             std::unordered_set<std::string> &seen_activations)
+{
+    // Vector of activation pairs: activation tag atom idx and activation tag element
+    std::vector<std::pair<unsigned int, unsigned int>> operators = {};
+
+    // Iterate over all neighboring atoms of this atom
+    for(const auto &neighbor_atom: mol.atomNeighbors(&atom))
+    {
+        // Get the atomic number of the neighbor
+        const unsigned int neighbor_atom_elem = neighbor_atom->getAtomicNum();
+
+        // Is the neighbor an activation tag
+        if (activation_types.count(neighbor_atom_elem) > 0)
+        {
+            // Get the atomic index of the neighbor
+            const unsigned int neighbor_idx = neighbor_atom->getIdx();
+
+            // Get the isotope
+            const unsigned int neighbor_isotope = neighbor_atom->getIsotope();
+
+            // Convert information about activation tag to a string
+            std::string activation = std::to_string(neighbor_isotope) + "_" + std::to_string(neighbor_atom_elem);
+
+            // Check if the activation information string has been observed
+            if (seen_activations.count(activation) == 0)
+            {
+                // Store a pair with the obtained info
+                operators.emplace_back(std::make_pair(neighbor_idx, neighbor_atom_elem));
+
+                // Store the activation information string
+                seen_activations.emplace(activation);
+            }
+        }
+    }
+    return operators;
+}

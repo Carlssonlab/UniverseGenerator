@@ -1,0 +1,15 @@
+CC(=O)Nc1noc2c1CCC([Lu])C2
+O=C(C[Lu])Nc1noc2c1CCCC2
+CC(=O)Nc1noc2c1C(=[Hf])CCC2
+CC(=O)Nc1noc2c1C([Lu])CCC2
+CC(=O)Nc1noc2c1C([Re])C([Re])CC2
+CC(=O)Nc1noc2c1CC([Re])C([Re])C2
+CC(=O)Nc1noc2c1CCCC2[Lu]
+CC(=O)Nc1noc2c1CC([Lu])CC2
+CC(=O)Nc1noc2c1CCCC2=[Hf]
+O=C(C#[Ta])Nc1noc2c1CCCC2
+CC(=O)N([Lu])c1noc2c1CCCC2
+CC(=O)Nc1noc2c1CCC([Re])C2[Re]
+O=C(C=[Hf])Nc1noc2c1CCCC2
+CC(=O)Nc1noc2c1CC(=[Hf])CC2
+CC(=O)Nc1noc2c1CCC(=[Hf])C2

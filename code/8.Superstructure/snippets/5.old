@@ -1,0 +1,92 @@
+// Check if the parsed bond is bound to activator tags
+bool is_bond_bound_to_activators(const RDKit::ROMol &mol, const RDKit::Bond &bond, \
+                                 const std::unordered_map<unsigned int, std::unordered_set<unsigned int>> &bond_adjacencies,\
+                                 const std::unordered_map<unsigned int, std::unordered_set<unsigned int>> &atom_adjacencies)
+{
+    // Element numbers to exclude as regular heavy atoms
+    std::unordered_set<unsigned int> exclude_elem = {75u,76u};
+
+    // Check if this bond is activated!
+    std::pair<std::vector<unsigned int>,std::vector<unsigned int>> bond_info = is_activated_bond(mol, bond);
+    if (bond_info.first.size() == 0 && bond_info.second.size() == 0)
+    {
+        //std::cout << "bond is not activated :-(" << std::endl;
+        return false;
+    }
+    else
+    {
+        ;//std::cout << "bond is activated :-)" << std::endl;
+    }
+    
+    // Get the atoms forming the bond
+    const RDKit::Atom *bond_bgn = bond.getBeginAtom();
+    const RDKit::Atom *bond_end = bond.getEndAtom();
+
+    // Get the indices of the atoms that form the bond
+    const unsigned int bond_bgn_idx = bond_bgn->getIdx();
+    const unsigned int bond_end_idx = bond_end->getIdx();
+
+    // Iterate over all neighbor bond indices
+    for (const unsigned int& neighbor_bond_idx: bond_adjacencies.at(bond.getIdx()))
+    {
+        //std::cout << "Neighbor bond index is:\t" << neighbor_bond_idx << std::endl;
+
+        // Get the bond with this index
+        const RDKit::Bond *neighbor_bond = mol.getBondWithIdx(neighbor_bond_idx);
+
+        // Check if the bond is activated
+        std::pair<std::vector<unsigned int>,std::vector<unsigned int>> neighbor_bond_info = is_activated_bond(mol, *neighbor_bond);
+        if (neighbor_bond_info.first.size() == 0 && neighbor_bond_info.second.size() == 0)
+        {
+            //std::cout << "Neighbor was not activated" << std::endl;
+            continue;
+        }
+
+        //std::cout << "I SURVIVED" << std::endl;
+
+        // At this bond, our bond and a neighboring bond are activated
+        const RDKit::Atom *neighbor_bond_bgn = neighbor_bond->getBeginAtom();
+        const RDKit::Atom *neighbor_bond_end = neighbor_bond->getEndAtom();
+        
+        //
+        const unsigned int neighbor_bond_bgn_idx = neighbor_bond_bgn->getIdx();
+        const unsigned int neighbor_bond_end_idx = neighbor_bond_end->getIdx();
+        
+        // Store all atom indices
+        std::vector<unsigned int> atom_indices = {bond_bgn_idx,bond_end_idx,neighbor_bond_bgn_idx,neighbor_bond_end_idx};
+
+        unsigned int common_atom_idx;
+        // Iterate over all atom indices in the bond and its neighbor
+        for (const unsigned int& j : atom_indices)
+        {
+            // Find the index of the atom the neighboring bonds have in common
+            if (count(atom_indices.begin(), atom_indices.end(),j) == 2)
+            {
+                common_atom_idx = j;
+            }
+        }
+
+        // Iterate over all neighboring atoms of the common atom
+        unsigned int sum = 0;
+        for (const unsigned int& neighbor_atom_idx: atom_adjacencies.at(common_atom_idx))
+        {
+            //
+            const RDKit::Atom *neighbor_atom = mol.getAtomWithIdx(neighbor_atom_idx);
+            const unsigned int neighbor_atom_elem = neighbor_atom->getAtomicNum();
+
+            //
+            if (exclude_elem.find(neighbor_atom_elem) != exclude_elem.end())
+            {
+                ++sum;
+            }
+        }
+
+        // At max two rings to be fused onto an atom
+        if (sum < 2)
+        {
+            return false;
+        }
+    }
+
+    return true;
+}

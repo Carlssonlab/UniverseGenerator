@@ -1,0 +1,71 @@
+// Generates all partitions of an integer n into k parts.
+std::vector<std::vector<int>> generate_partitions(int& n, int& k)
+{    
+    // n: The integer to partition.
+    // k: The number of parts in the partition.
+
+    // Initialize vector for storing valid partitions
+    std::vector<std::vector<int>> partitions = {};
+    
+    // Create valid range
+    std::vector<int> range = {};
+    for (int i = 0; i <= n + k - 1; i++)
+    {
+        range.emplace_back(i);
+    }
+    
+    // Generate all possible combinations of k-1 separators
+    std::vector<std::vector<int>> separator_positions = generateCombinations(range, k - 1);
+
+    // Iterate over separator positions
+    for (const std::vector<int>& separator : separator_positions)
+    {    
+        // Initialize the partition for this separator
+        std::vector<int> partition = {};
+
+        // Initialize vector for distance calculations
+        std::vector<int> head = {-1};
+        std::vector<int> tail = {n + k - 1};
+
+        // Counter for the separator size
+        // int separator_length = 1;
+
+        // insert the separator sequence in the head
+        for (const int& i : separator)
+        {
+            head.emplace_back(i);
+            //++separator_length; //TODO I'm not increasing the separator length, but still works?
+        }
+
+        // insert the reverse separator sequence in the tail
+        for (auto it = separator.rbegin(); it != separator.rend(); ++it)
+        {
+            int element = *it;
+            tail.insert(tail.begin(), element);
+        }
+
+        // Compute distances between adjacent separators, this is the partition
+        for (int i = 0; i < k; i++)
+        {
+            partition.emplace_back(tail[i] - head[i] - 1);
+        }
+
+        bool valid_partition = true;
+        int sum_partition = 0;
+        for (const int& i : partition)
+        {
+            if (i <= 0)
+            {
+                valid_partition = false;
+                break;
+            }
+            sum_partition+=i;
+        }
+        if (valid_partition && sum_partition == n)
+        {
+            partitions.emplace_back(partition);
+        }
+    }
+
+    return partitions;
+}
