@@ -258,7 +258,7 @@ The first step is to link the [activated substituent libraries](demo/6.substitue
 bash ${UniverseGenerator}/scripts/fetch_substituents.sh
 ```
 
-The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/reference.output.scaffolds.smi) and [activated substituent libraries](demo/6.substituents/reference.output.substituents.smi). To add **5** heavy atoms to your scaffold, run the following command: 
+The second step in building superstructure molecules is creating instructions on how to make compounds with a total of `N heavy atoms` using a series of [activated scaffolds](demo/7.scaffold/reference.output.scaffolds.smi) and [activated substituent libraries](auxiliaries/substituents/substituents.list). To add **5** heavy atoms to your scaffold, run the following command: 
 ```bash
 # Generate instructions for coupling substituents onto activated scaffolds, where the target products are composed of 15 heavy atoms
 ${UniverseGenerator}/bin/build-instructions -i ${demo}/8.superstructure/input.scaffolds.smi -o ${demo}/8.superstructure/superstructure-instructions.csv -n 15
