@@ -263,11 +263,11 @@ The second step in building superstructure molecules is creating instructions on
 # Generate instructions for coupling substituents onto activated scaffolds, where the target products are composed of 15 heavy atoms
 ${UniverseGenerator}/bin/build-instructions -i ${demo}/8.superstructure/input.scaffolds.smi -o ${demo}/8.superstructure/superstructure-instructions.csv -n 15
 ```
-In the third step (which can be effectively parallelized on a HPC) the [instructions](demo/8.superstructure/safe.superstructure-instructions.csv) derived in the second step are carried out and [valid superstructures](demo/8.superstructure/safe.output.superstructure.smi) are generated. This is achieved through the following command:
+In the third step (which can be effectively parallelized on a HPC) the [instructions](demo/8.superstructure/reference.superstructure-instructions.csv) derived in the second step are carried out and [valid superstructures](demo/8.superstructure/reference.output.superstructures.smi) are generated. This is achieved through the following command:
 
 ```bash
 # Execute the couplings found in the instruction files
-${UniverseGenerator}/bin/build-superstructures -i ${demo}/8.superstructure/superstructure-instructions.csv -o ${demo}/8.superstructure/output.superstructure.smi -f ${UniverseGenerator}/auxiliaries/filter_file.tsv
+${UniverseGenerator}/bin/build-superstructures -i ${demo}/8.superstructure/superstructure-instructions.csv -o ${demo}/8.superstructure/output.superstructures.smi -f ${UniverseGenerator}/auxiliaries/superstructure_file.tsv
 ```
 
 # Additional information
