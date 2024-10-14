@@ -1,2 +1,14 @@
 nauty*
 rdkit*
+bin/adjmat2smiles
+bin/corina
+bin/molconvert
+bin/obabel
+bin/eliminate-strained
+bin/unsaturate
+bin/functionalize
+bin/decorate
+bin/activate-substituent
+bin/activate-scaffold
+bin/build-instructions
+bin/build-superstructures
