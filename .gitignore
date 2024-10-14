@@ -1,5 +1,8 @@
 nauty*
 rdkit*
+bin/geng
+bin/planarg
+bin/showg
 bin/adjmat2smiles
 bin/corina
 bin/molconvert
