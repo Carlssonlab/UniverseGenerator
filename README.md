@@ -234,7 +234,7 @@ To further decorate functionalized molecules based on the reaction patterns foun
 ${UniverseGenerator}/bin/decorate -i ${demo}/5.decorate/input.decorate.smi -o ${demo}/5.decorate/output.decorate.smi -r ${UniverseGenerator}/auxiliaries/reaction_library.tsv -n 5
 
 # Symbolic link for next step
-ln -s ${demo}/5.decorate/output.decorate.smi ${demo}/6.activate/input.substituents.smi
+ln -s ${demo}/5.decorate/output.decorate.smi ${demo}/6.substituents/input.substituents.smi
 ```
 
 If you want to introduce other functional groups, you can modify the [file](auxiliaries/reaction_library.tsv) containing the chemical transformations and add new [SMIRKS](https://www.daylight.com/dayhtml/doc/theory/theory.smirks.html) patterns. 
@@ -251,6 +251,9 @@ To prepare a [fragment scaffold](demo/7.scaffold/scaffold.smi) for superstructur
 ```bash
 # Activate a scaffold for coupling with substituent libraries
 ${UniverseGenerator}/bin/activate-scaffold -i ${demo}/7.scaffold/input.scaffold.smi -o ${demo}/7.scaffold/output.scaffolds.smi
+
+# Symbolic link for next step
+ln -s ${demo}/7.scaffold/output.scaffolds.smi ${demo}/8.superstructure/input.scaffolds.smi
 ```
 
 ## 8. Coupling Substituents to a Scaffold
@@ -269,7 +272,7 @@ In the third step (which can be effectively parallelized on a HPC) the [instruct
 
 ```bash
 # Execute the couplings found in the instruction files
-${UniverseGenerator}/bin/build-superstructures -i ${demo}/8.superstructure/superstructure-instructions.csv -o ${demo}/8.superstructure/output.superstructures.smi -f ${UniverseGenerator}/auxiliaries/superstructure_file.tsv
+${UniverseGenerator}/bin/build-superstructures -i ${demo}/8.superstructure/superstructure-instructions.csv -o ${demo}/8.superstructure/output.superstructures.smi -f ${UniverseGenerator}/auxiliaries/superstructure_filter.tsv
 ```
 
 # Additional information
