@@ -4,7 +4,7 @@ The UniverseGenerator builds all possible superstructures of a fragment that hav
 
 ![universe](./images/universe.png)
 
-A more detailed description of the algorithm can be found in the corresponding [paper](https://doi.org/some_number). Compound libraries are available on [Zenodo](https://doi.org/some_number).
+A more detailed description of the algorithm can be found in the corresponding [paper](https://doi.org/10.1038/s41467-025-56893-9). Compound libraries are available on [Zenodo](https://zenodo.org/records/14460126).
 
 # Table of contents
 
@@ -282,7 +282,7 @@ For another description of generated databases, we refer to the [GDB17 paper](ht
 If you have any problems, questions or suggestions please open a GitHub Issue/Discussion.
 
 # Citing our work
-If you use the UniverseGenerator in your research, please cite our work as follows: [Luttens, A., *et al* Virtual Fragment Screening for DNA repair inhibitors in Vast Chemical Space. Journal Abbrev (2024). https://doi.org/some_number](https://doi.org/some_number).
+If you use the UniverseGenerator in your research, please cite our work as follows: [Luttens, A., *et al* Virtual Fragment Screening for DNA repair inhibitors in Vast Chemical Space. Nat Commun 16, 1741 (2025). [https://doi.org/10.1038/s41467-025-56893-9](https://doi.org/10.1038/s41467-025-56893-9).
 
 
 Thank you for your interest in our work!
